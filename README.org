@@ -1,0 +1,8 @@
+#+title: LazyTab - Easy Matrix, Array or Tabular input in LaTeX
+
+Little piece of configuration that uses =orgtbl-mode= for Emacs to simplify typing in arrays and amsmath matrix environments, along with text tables.
+
+Instructions forthcoming... at some point. For now you can just look at the code. Or this demo:
+
+https://user-images.githubusercontent.com/8607532/139576107-2df5e380-ccc0-44c1-b94f-91576cea7ee1.mp4
+
