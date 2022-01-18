@@ -65,9 +65,14 @@
 orgtbl syntax."
   :global nil
   (if lazytab-mode
-      (progn  (define-key orgtbl-mode-map (kbd "<tab>") 'lazytab-org-table-next-field-maybe)
+      (progn  (require 'org-table)
+              (define-key orgtbl-mode-map (kbd "<tab>") 'lazytab-org-table-next-field-maybe)
               (define-key orgtbl-mode-map (kbd "TAB") 'lazytab-org-table-next-field-maybe)
               (add-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field))
     (define-key orgtbl-mode-map (kbd "<tab>") 'org-table-next-field)
     (define-key orgtbl-mode-map (kbd "TAB") 'org-table-next-field)
     (remove-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field)))
+
+
+(provide 'lazytab)
+;;; lazytab.el ends here
