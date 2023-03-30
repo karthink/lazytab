@@ -17,7 +17,7 @@
   (interactive "P")
   (unless (org-at-table-p) (user-error "Not at a table"))
   (let* ((table (org-table-to-lisp))
-         params
+         (params '(:backend latex :raw t))
          (replacement-table
           (if (texmathp)
               (lazytab-orgtbl-to-amsmath table params)
