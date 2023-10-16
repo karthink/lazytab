@@ -8,10 +8,11 @@
   (lazytab-orgtbl-edit))
 
 (defun lazytab-orgtbl-edit ()
-  (advice-add 'orgtbl-ctrl-c-ctrl-c :after #'lazytab-orgtbl-replace)
-  (orgtbl-mode 1)
-  (open-line 1)
-  (insert "\n|"))
+  (when (eq major-mode 'latex-mode)
+    (advice-add 'orgtbl-ctrl-c-ctrl-c :after #'lazytab-orgtbl-replace)
+    (orgtbl-mode 1)
+    (open-line 1)
+    (insert "\n|")))
 
 (defun lazytab-orgtbl-replace (_)
   (interactive "P")
