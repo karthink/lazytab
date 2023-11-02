@@ -1,3 +1,4 @@
+;;; lazytab.el --- easy matrix, array, or tabular input in latex
 (require 'cdlatex)
 (require 'org-table)
 
