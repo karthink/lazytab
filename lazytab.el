@@ -29,7 +29,6 @@
     (push-mark)
     (insert replacement-table)
     (align-regexp (region-beginning) (region-end) "\\([:space:]*\\)& ")
-    (orgtbl-mode -1)
     (advice-remove 'orgtbl-ctrl-c-ctrl-c #'lazytab-orgtbl-replace)))
 
 (defun lazytab-orgtbl-to-amsmath (table params)
