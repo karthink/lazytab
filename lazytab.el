@@ -57,8 +57,9 @@
   (interactive)
   (if (bound-and-true-p cdlatex-mode)
       (cdlatex-tab)
-    (org-table-next-field)))
-
+    (condition-case err
+	(org-table-next-field)
+      (error (indent-for-tab-command)))))
 
 ;;;###autoload
 (define-minor-mode lazytab-mode
