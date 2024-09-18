@@ -8,7 +8,7 @@
   (lazytab-orgtbl-edit))
 
 (defun lazytab-orgtbl-edit ()
-  (when (eq major-mode 'latex-mode)
+  (when (memq major-mode '(LaTeX-mode latex-mode))
     (advice-add 'orgtbl-ctrl-c-ctrl-c :after #'lazytab-orgtbl-replace)
     (orgtbl-mode 1)
     (open-line 1)
