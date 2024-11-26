@@ -1,3 +1,4 @@
+;;; lazytab.el --- easy matrix, array, or tabular input in latex
 (require 'cdlatex)
 (require 'org-table)
 
@@ -28,7 +29,6 @@
     (push-mark)
     (insert replacement-table)
     (align-regexp (region-beginning) (region-end) "\\([:space:]*\\)& ")
-    (orgtbl-mode -1)
     (advice-remove 'orgtbl-ctrl-c-ctrl-c #'lazytab-orgtbl-replace)))
 
 (defun lazytab-orgtbl-to-amsmath (table params)
@@ -57,22 +57,25 @@
   (interactive)
   (if (bound-and-true-p cdlatex-mode)
       (cdlatex-tab)
-    (org-table-next-field)))
-
+    (condition-case err
+	(org-table-next-field)
+      (error (indent-for-tab-command)))))
 
 ;;;###autoload
 (define-minor-mode lazytab-mode
   "Type in matrices, arrays and tables in LaTeX buffers with
 orgtbl syntax."
   :global nil
-  (if lazytab-mode
-      (progn  (require 'org-table)
-              (define-key orgtbl-mode-map (kbd "<tab>") 'lazytab-org-table-next-field-maybe)
-              (define-key orgtbl-mode-map (kbd "TAB") 'lazytab-org-table-next-field-maybe)
-              (add-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field))
-    (define-key orgtbl-mode-map (kbd "<tab>") 'org-table-next-field)
-    (define-key orgtbl-mode-map (kbd "TAB") 'org-table-next-field)
-    (remove-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field)))
+  (require 'org-table)
+  ;; (if lazytab-mode
+  ;;     (progn  (require 'org-table)
+  ;;             (define-key orgtbl-mode-map (kbd "<tab>") 'lazytab-org-table-next-field-maybe)
+  ;;             (define-key orgtbl-mode-map (kbd "TAB") 'lazytab-org-table-next-field-maybe)
+  ;;             (add-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field))
+  ;;   (define-key orgtbl-mode-map (kbd "<tab>") 'org-table-next-field)
+  ;;   (define-key orgtbl-mode-map (kbd "TAB") 'org-table-next-field)
+  ;;   (remove-hook 'cdlatex-tab-hook 'lazytab-cdlatex-or-orgtbl-next-field))
+  )
 
 
 (provide 'lazytab)
